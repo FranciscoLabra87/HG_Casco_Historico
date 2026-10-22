@@ -10,3 +10,8 @@ desktop.ini
 
 # Nada de dependencias: este sitio es estatico y no tiene build
 node_modules/
+vista-escritorio.png
+vista-celular.png
+
+# Cache local de wrangler: trae el id y el correo de la cuenta de Cloudflare
+.wrangler/

@@ -1,73 +1,64 @@
-# Landing · AG Casco Histórico · para Hostinger
+# Landing · AG Casco Histórico de Puente Alto
 
-Sitio estático de presentación. **No tiene backend**: es HTML, CSS y JS que
-corre en cualquier hosting. El sistema de socios sigue viviendo en Cloudflare
-(`chbeta.pages.dev`) y esta landing solo enlaza hacia allá.
+Página de presentación de la agrupación. **Estática y autocontenida**: HTML, CSS
+y nada más. Sin backend, sin base de datos, sin JavaScript, sin build. Corre en
+cualquier hosting.
 
-## Qué subir
+No es una copia del sistema de socios ni se conecta a él. Es una página de
+presentación independiente: quiénes somos, qué hacemos, de dónde venimos y cómo
+contactarnos.
 
-Todo el contenido de **`public_html/`** va dentro de la carpeta `public_html`
-de Hostinger. No subas la carpeta `public_html` completa: sube lo que hay
-*dentro* de ella, o te queda el sitio en `tudominio.cl/public_html/`.
+## Qué contiene
 
 ```
-public_html/
-├── index.html          la landing
+public_html/            ← esto es lo que se sube a Hostinger
+├── index.html          la página (10 KB)
 ├── 404.html            página de error
 ├── .htaccess           HTTPS, caché, cabeceras de seguridad
 ├── robots.txt
 ├── sitemap.xml
 ├── favicon.svg
-├── assets/             logo e íconos
-├── css/                hoja de estilos del sitio
-└── js/                 menú y animación de scroll
+├── assets/             emblema e íconos
+└── css/
+    └── estilos.css     la hoja de estilos (10 KB)
 ```
 
-Pesa 280 KB en total.
+**156 KB en total, 9 archivos.** De esos, 111 KB son el emblema.
 
-## Cómo subirlo
+## Cómo subirlo a Hostinger
 
 1. Entra a hPanel → **Administrador de archivos**.
-2. Abre `public_html` y borra el `default.php` o `index.html` de ejemplo si está.
-3. Arrastra todos los archivos y carpetas de este `public_html/`.
-4. Activa **Mostrar archivos ocultos** para confirmar que `.htaccess` subió.
-   Si no lo ves, no subió: ese archivo empieza con punto y muchos programas
-   lo esconden.
+2. Abre `public_html` y borra el `default.php` o `index.html` de ejemplo.
+3. Sube **lo que hay dentro** de la carpeta `public_html/` de este proyecto, no
+   la carpeta misma. Si subes la carpeta, el sitio te queda en
+   `tudominio.cl/public_html/`.
+4. Activa **Mostrar archivos ocultos** y confirma que `.htaccess` subió. Empieza
+   con punto, así que muchos programas lo esconden. Sin él pierdes el HTTPS
+   forzado, la página 404 propia, las cabeceras de seguridad y la caché.
 
-## Antes de publicar: reemplazar el dominio
+## Antes de publicar: poner el dominio real
 
-Tres archivos traen `TU-DOMINIO.cl` como marcador. Cámbialo por tu dominio real:
+Tres archivos traen `TU-DOMINIO.cl` como marcador:
 
 | Archivo | Qué cambiar |
 |---|---|
-| `index.html` | `<link rel="canonical">` y `og:url` |
+| `index.html` | `canonical`, `og:url`, `og:image` y el bloque JSON-LD |
 | `robots.txt` | la línea `Sitemap:` |
 | `sitemap.xml` | la etiqueta `<loc>` |
 
-Si no lo haces, Google puede entender que el contenido pertenece a otro sitio.
+## Decisiones de diseño
 
-## Qué se sacó de la portada original
+- **Sin JavaScript.** El menú de celular se resuelve con CSS: los cuatro enlaces
+  se envuelven bajo el logo. No hace falta botón de hamburguesa.
+- **Sin formulario de contacto.** Un formulario necesita servidor. En su lugar
+  hay enlaces directos a WhatsApp y correo, que es lo que la agrupación ya usa.
+- **El emblema se sirve en WebP.** El PNG original pesaba 2,47 MB; en WebP a
+  620 px pesa 111 KB.
+- **Tipografías desde Google Fonts.** Cinzel, Cormorant Garamond y Source Sans 3.
+  Es la única dependencia externa de la página.
 
-La landing se generó desde la portada del sistema, recortando lo que necesita
-base de datos:
+## Si más adelante quieres un formulario
 
-- **Agenda de eventos.** Se alimentaba de `/api/contenido`. Ahora hay un enlace
-  a la agenda real en el sistema.
-- **Formulario de contacto.** Hacía `POST` a `/api/contacto`. Lo reemplazan los
-  botones de WhatsApp y correo, que es lo que la agrupación ya usa.
-- **La PWA** (instalación como app y modo sin conexión). Pertenece al sistema.
-
-Todo lo demás es idéntico: quiénes somos, los cuatro pilares, la línea de
-tiempo, los comercios destacados, las preguntas frecuentes y el pie.
-
-## Si quieres el formulario de contacto de vuelta
-
-Hostinger sí permite PHP, así que se puede. Hace falta un `contacto.php` que
-reciba el formulario y mande el correo, más protección contra bots. Pídelo y
-se arma.
-
-## Mantener las dos versiones alineadas
-
-Esta landing es una **copia derivada**. Si cambias un texto en la portada del
-sistema, acá no cambia solo. Conviene regenerarla cuando el contenido cambie
-de verdad, en vez de editar los dos a mano y que se vayan separando.
+Hostinger permite PHP, así que se puede: hace falta un `contacto.php` que reciba
+el formulario, lo valide, mande el correo y filtre bots. Son unas pocas decenas
+de líneas.

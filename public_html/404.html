@@ -8,72 +8,81 @@
 <meta name="description" content="La página que buscas no existe o cambió de dirección." />
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+<meta name="theme-color" content="#391e14" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/css/estilos.css" />
 <style>
-  :root {
-    --serif-h1: "Cinzel", serif;
-    --serif-h2: "Cormorant Garamond", serif;
-    --sans: "Source Sans 3", system-ui, sans-serif;
-  }
-  .error-wrap {
-    min-height: 100svh;
-    display: grid;
-    place-items: center;
-    padding: 40px 16px;
-  }
-  .error-card {
-    width: min(560px, 100%);
-    padding: clamp(32px, 6vw, 56px);
+  .error { min-height: 100svh; display: grid; place-items: center; padding: 40px 0; }
+  .error-caja {
+    width: min(540px, 100%);
+    padding: clamp(30px, 6vw, 54px);
     text-align: center;
-    background: var(--hm-surface);
-    border: 1px solid var(--hm-line);
-    border-radius: var(--hm-radius-lg);
-    box-shadow: var(--hm-shadow);
+    background: #fffdf8;
+    border: 1px solid var(--linea);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
   }
-  .error-logo { width: 68px; height: 68px; margin: 0 auto 22px; display: block; border-radius: 50%; }
-  .error-code {
+  .error-caja img { width: 66px; height: 66px; margin: 0 auto 22px; border-radius: 50%; }
+  .error-numero {
     margin: 0;
-    font-family: var(--serif-h1);
-    font-size: clamp(56px, 16vw, 104px);
+    font-family: var(--display);
+    font-size: clamp(54px, 15vw, 96px);
     line-height: 1;
-    letter-spacing: .04em;
-    color: var(--hm-accent);
+    letter-spacing: .05em;
+    color: var(--dorado);
   }
-  .error-card h1 { margin: 14px 0 10px; font-size: clamp(1.4rem, 4vw, 1.9rem); }
-  .error-card p { margin: 0 0 26px; color: var(--hm-ink-soft); }
-  .error-links { margin-top: 30px; padding-top: 22px; border-top: 1px solid var(--hm-line); }
-  .error-links p { margin: 0 0 10px; font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; }
-  .error-links ul {
-    list-style: none; margin: 0; padding: 0;
-    display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: center;
+  .error-caja h1 {
+    margin: 12px 0 10px;
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 4vw, 1.9rem);
+    font-weight: 600;
   }
-  .error-links a { color: var(--hm-accent-ink); text-decoration: underline; }
+  .error-caja > p { margin: 0 0 28px; color: var(--tinta-suave); }
+  .error-enlaces { margin-top: 30px; padding-top: 22px; border-top: 1px solid var(--linea); }
+  .error-enlaces p {
+    margin: 0 0 12px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--madera);
+  }
+  .error-enlaces ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 </style>
-<link rel="stylesheet" href="/css/sitio-2026.css" />
 </head>
-<body class="site-2026">
-<main class="error-wrap">
-  <div class="error-card">
-    <a href="/" aria-label="Ir a la portada">
-      <img class="error-logo" src="/assets/logo-casco-historico-2026.webp" alt="Agrupación Barrio Casco Histórico de Puente Alto" width="68" height="68" />
-    </a>
+<body>
+<main class="error">
+  <div class="contenedor">
+    <div class="error-caja">
+      <a href="/" aria-label="Ir a la portada">
+        <img src="/assets/logo-casco-historico-2026.webp" alt="Agrupación Gremial Casco Histórico de Puente Alto" width="66" height="66" />
+      </a>
 
-    <p class="error-code">404</p>
-    <h1>Esta página no existe</h1>
-    <p>Puede que el enlace esté mal escrito o que la página haya cambiado de dirección.</p>
+      <p class="error-numero">404</p>
+      <h1>Esta página no existe</h1>
+      <p>Puede que el enlace esté mal escrito o que la página haya cambiado de dirección.</p>
 
-    <a href="/" class="btn gold">Ir a la portada</a>
+      <a href="/" class="boton principal">Ir a la portada</a>
 
-    <div class="error-links">
-      <p>O prueba con</p>
-      <ul>
-        <li><a href="/#nosotros">Quiénes somos</a></li>
-        <li><a href="/#comercio">Comercios del barrio</a></li>
-        <li><a href="/#faq">Preguntas frecuentes</a></li>
-        <li><a href="https://chbeta.pages.dev/login.html" target="_blank" rel="noopener">Acceso socios</a></li>
-      </ul>
+      <div class="error-enlaces">
+        <p>O prueba con</p>
+        <ul>
+          <li><a href="/#quienes">Quiénes somos</a></li>
+          <li><a href="/#pilares">Qué hacemos</a></li>
+          <li><a href="/#historia">Historia</a></li>
+          <li><a href="/#contacto">Contacto</a></li>
+        </ul>
+      </div>
     </div>
   </div>
 </main>
