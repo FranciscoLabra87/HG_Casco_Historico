@@ -1,0 +1,12 @@
+# Basura del sistema operativo y de OneDrive
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Editores
+.vscode/
+.idea/
+*.swp
+
+# Nada de dependencias: este sitio es estatico y no tiene build
+node_modules/

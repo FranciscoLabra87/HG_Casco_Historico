@@ -1,0 +1,48 @@
+# ============================================================
+# AG Casco Historico - landing estatica
+# Hostinger usa LiteSpeed, que lee este archivo igual que Apache.
+# La compresion la hace LiteSpeed por su cuenta: no se configura aqui.
+# ============================================================
+
+# --- Forzar HTTPS ---
+# Hostinger entrega el certificado gratis; sin esto el sitio
+# tambien responde por http y el navegador lo marca "no seguro".
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# --- Direcciones sin .html ---
+# /contacto responde lo mismo que /contacto.html
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html [L]
+
+# --- Pagina de error propia ---
+ErrorDocument 404 /404.html
+
+# --- No listar el contenido de las carpetas ---
+Options -Indexes
+
+# --- Cabeceras de seguridad ---
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "DENY"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  # Esta landing no tiene backend: solo carga sus propios archivos,
+  # las fuentes de Google y los enlaces al sistema en Cloudflare.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+</IfModule>
+
+# --- Cache del navegador ---
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html                 "access plus 0 seconds"
+  ExpiresByType text/css                  "access plus 1 year"
+  ExpiresByType application/javascript    "access plus 1 year"
+  ExpiresByType image/webp                "access plus 1 year"
+  ExpiresByType image/png                 "access plus 1 year"
+  ExpiresByType image/svg+xml             "access plus 1 year"
+</IfModule>
